@@ -22,7 +22,7 @@ body{
     margin-left: 8%;
     font-size: 50px;
 }
-.date {
+.dat {
     text-align: end;
     width: 20%;
     padding-right: 20px;
@@ -172,6 +172,7 @@ h4{
     margin-top: 2%;
 }
 .deroulant{
+
     backdrop-filter: blur(3px);
     background: rgba(246, 244, 244, 0.40);
     border-radius: 30px;
@@ -209,11 +210,15 @@ h4{
     margin-top:1%;
     margin-left: 5%;
 }
-.grp2{
+.btn{ 
     font-size: 30px;
     margin-top: 10%;
     margin-bottom: 0%;
+    border: none;
+    background: local;
+
 }
+
 .grp1{
     align-items: center;
     margin-bottom: -10%;
@@ -222,9 +227,10 @@ h3{
     margin-left: 0%;
     font-size: 20px;
 }
-.suite{
+.grp2{ 
+    display: none; /*  essai de bouton */
+    font-size: 15px;
     margin-left: 5%;
-    height: 250px;
+    height: auto;
     width: 90%;
-    background-color: aqua;
 }
