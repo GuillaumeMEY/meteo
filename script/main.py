@@ -4,6 +4,7 @@ from typing import Union
 import requests
 import json
 import datetime
+from database import Database
 
 """
     Todo:
@@ -147,19 +148,21 @@ def locatePublicIp(ip_addr : str):
 
 def main():
 
-    conn, db = connectDatabase()
+    # conn, db = connectDatabase()
 
-    city_data = handleGeolocation()
+    # city_data = handleGeolocation()
 
-    day_id = getCurrentDayId(db)
+    # day_id = getCurrentDayId(db)
 
-    city_lat, city_lon, city_id = handleGetCityData(city_data, db)
+    # city_lat, city_lon, city_id = handleGetCityData(city_data, db)
 
-    weather_api = getWeatherApi(city_lat, city_lon)
-    storeWeatherApiInDB(weather_api, city_id, day_id, db)
-    # Push the change into the db
-    conn.commit()
+    # weather_api = getWeatherApi(city_lat, city_lon)
+    # storeWeatherApiInDB(weather_api, city_id, day_id, db)
+    # # Push the change into the db
+    # conn.commit()
     
+    db = Database()
+    db.test()
 
 if __name__ == '__main__':
     main()
