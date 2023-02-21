@@ -9,8 +9,9 @@ from database import Database
 """
     Todo:
        - Refactor the code for POO
-       - Type all function ...
        - Refactor name function to snake_case
+       - Geolocalisation 
+       - write requirement txt
 """
 
 def connectDatabase():

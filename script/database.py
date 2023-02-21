@@ -39,9 +39,19 @@ class Database:
         
         return conn, conn.cursor()
         
-    def queryBuilder(self, query, data):
+    def query_builder(self, query, data):
         try:
             self.cursor.execute(query, data)
             print("Success of the query")
         except mariadb.Error as e:
             print("Error while executing the query: {0}".format(e))
+    
+    def insert_into_Measures(self, type, value, source):
+        try:
+            query = "INSERT INTO Measures(type, value, source) values(?,?,?)"
+            data = (type, value, source)
+            self.cursor.execute(query, data)
+            id = self.cursor.lastrowid
+            return id
+        except mariadb.Error as e :
+            print("Error while insert into Measures: {0}".format(e))
