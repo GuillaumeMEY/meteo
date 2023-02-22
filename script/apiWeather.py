@@ -11,7 +11,7 @@ class ApiWeather:
         self.api_key = os.getenv("OW_API_Key")
         self.baseUrl = "https://api.openweathermap.org"
         
-    def city_data(self, city_name):
+    def get_city_data(self, city_name):
         try: 
             url = "${0}/geo/1.0/direct?q={1}&limit=5&appid={2}".format(self.baseUrl, city_name, self.api_key)
             response = requests.get(url) 
