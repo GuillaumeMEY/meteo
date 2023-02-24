@@ -1,10 +1,11 @@
 import mariadb
 import sys
-from typing import Union
 import requests
 import json
 import datetime
 from database import Database
+from api_weather import ApiWeather
+from api_geo_loc import ApiGeoLoc
 
 """
     Todo:
@@ -146,6 +147,31 @@ def locatePublicIp(ip_addr : str):
 
 #8898a6c67188d817f2fba8a72419b1a4 https://www.whatismyip.com/login-welcome-page/
 
+"""
+    Algo:
+        - Get the ip
+        - Get the city by the ip
+        - Get data information of the city long, lat
+        - Get weather by api
+        - Get measures by captor
+        - Store it to the db
+"""
+def data_extraction(api_response):
+    # data = (city_id, api_data["weather"][0]["main"], api_data["main"]["temp"], api_data["main"]["humidity"], api_data["main"]["pressure"], day_id)
+    temp = api_response["main"]["temp"]
+    humidity = api_response["main"]["humidity"]
+    pressure = api_response["main"]["pressure"]
+    weather = api_response["weather"][0]["main"]
+    
+    return {
+        "temp": str(int(temp)),
+        "humidity":str(humidity),
+        "pressure":str(pressure),
+        "weather":weather
+    }
+    
+
+
 
 def main():
 
@@ -162,8 +188,38 @@ def main():
     # # Push the change into the db
     # conn.commit()
     
-    db = Database()
-    db.test()
+    # Declare and init Class
+    database = Database()
+    api_weather = ApiWeather()
+    # api_geo_loc = ApiGeoLoc()
+    
+
+    # my_ip = api_geo_loc.get_public_addr()
+    # my_city = api_geo_loc.get_city_by_ip(my_ip)
+    
+    # Get latitude and logitude of the city for the OpenWeatherMap api
+    city_lat, city_lon = api_weather.get_city_data("pau")
+    
+    # Get the current weather data of the city 
+    api_weather_response = api_weather.get_weather_data(city_lat, city_lon)
+
+    weather_data = data_extraction(api_weather_response)
+    
+    
+    data = [
+        ("temp", weather_data['temp'], "api"),
+        ("humidity", weather_data['humidity'], "api"),
+        ("pression", weather_data['pressure'], "api"),
+        ("weather", weather_data['weather'], "api")
+    ]
+    
+    database.insert_into_Measures(data)
+    
+    # For push modification into the database
+    database.con.commit()
+
+    database.close_connection()
+
 
 if __name__ == '__main__':
     main()

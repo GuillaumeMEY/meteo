@@ -6,21 +6,13 @@ import os
 import sys
 
 load_dotenv()
-
-"""
-TODO: 
- - Implement one function query builder for make sql querie to the DB 
-    => return success and the id of item created
- - Maybe Implement specific queries for table 
-"""
-
 class Database:
     def __init__(self):
         self.host = os.getenv('DB_HOST')
         self.user = os.getenv('DB_USER')
         self.password = os.getenv('DB_PASSWORD')
         self.database = os.getenv('DB_NAME')
-        self.port = os.getenv('DB_PORT')
+        self.port = int(os.getenv('DB_PORT'))
         self.con, self.cursor = self.connection()
     
     def connection(self):
@@ -38,6 +30,9 @@ class Database:
             sys.exit(1)
         
         return conn, conn.cursor()
+    
+    def close_connection(self):
+        self.con.close()
         
     def query_builder(self, query, data):
         try:
@@ -46,12 +41,14 @@ class Database:
         except mariadb.Error as e:
             print("Error while executing the query: {0}".format(e))
     
-    def insert_into_Measures(self, type, value, source):
+
+    # data need to be an array of tuples
+    def insert_into_Measures(self, data):
         try:
             query = "INSERT INTO Measures(type, value, source) values(?,?,?)"
-            data = (type, value, source)
-            self.cursor.execute(query, data)
+            self.cursor.executemany(query, data)
             id = self.cursor.lastrowid
+            print("Insert into Measures succesfull")
             return id
         except mariadb.Error as e :
             print("Error while insert into Measures: {0}".format(e))
