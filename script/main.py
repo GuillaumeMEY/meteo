@@ -18,6 +18,7 @@ def data_extraction(api_response):
     weather = api_response["weather"][0]["main"]
     
     return {
+        # int(temp) for avoid float 
         "temp": str(int(temp)),
         "humidity":str(humidity),
         "pressure":str(pressure),
@@ -50,6 +51,8 @@ def main():
          ("humidity", weather_data['humidity'], "api"),
          ("pression", weather_data['pressure'], "api"),
          ("weather", weather_data['weather'], "api")
+         
+         #Sensor data here 
      ]
     
     database.insert_into_Measures(data)
