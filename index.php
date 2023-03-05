@@ -20,17 +20,17 @@
     </div>
     <div class="content">
         <div class="content1">
-            <article> <!-- Partie APi weathermap ? ou bdd ? -->
-                <div class="ville">Pau</div>
-                <div class="imagejour"></div>
-                <p class="temp"><?php echo readdernieretempapi($db,'temp','api') ; ?> °C</p> <!--  fonction qui appel la derniere temperature  fournis par l'API-->
+            <article>
+                <div class="ville"><?php echo readdernierevaleur($db,'city','api') ; ?></div> <!--  fonction qui appel la derniere localisation  fournis par l'API-->
+                <?php echo weather($db, 'weather', 'api') ; ?> <!--  fonction qui appel le dernier icone fournis par l'API-->
+                <p class="temp"><?php echo readdernierevaleur($db,'temp','api') ; ?> °C</p> <!--  fonction qui appel la derniere temperature  fournis par l'API-->
 
             </article>
             <aside> <!-- Partie capteur -->
                 <h2>Capteur n°1</h2>  <!--  nom du capteur -->
-                <p>Temp interieur <?php echo readdernieretempapi($db,'temp','capteur');?> °C</p> <!--  fonction qui appel la derniere temperature fournis par le capteur-->
-                <p>Humidité <?php echo readdernieretempapi($db,'humidite','capteur');?> %</p> <!--  fonction qui appel la derniere humidite fournis par le capteur-->
-                <p>Pression <?php echo readdernieretempapi($db,'pression','capteur');?> hPa</p> <!--  fonction qui appel la derniere pression fournis par le capteur-->
+                <p>Temp interieur <?php echo readdernierevaleur($db,'temp','capteur');?> °C</p> <!--  fonction qui appel la derniere temperature fournis par le capteur-->
+                <p>Humidité <?php echo readdernierevaleur($db,'humidite','capteur');?> %</p> <!--  fonction qui appel la derniere humidite fournis par le capteur-->
+                <p>Pression <?php echo readdernierevaleur($db,'pression','capteur');?> hPa</p> <!--  fonction qui appel la derniere pression fournis par le capteur-->
             </aside>
         </div>
 

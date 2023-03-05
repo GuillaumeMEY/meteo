@@ -1,6 +1,5 @@
 function date(){
     var mydate=new Date()
-    var year=mydate.getYear()
     var day=mydate.getDay()
     var month=mydate.getMonth()
     var daym=mydate.getDate()
