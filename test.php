@@ -1,152 +1,55 @@
+<?php require_once('Fonction.php'); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="logic.js"></script>
-    <title>Page de test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!--  font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!--  font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> <!--  font -->
+    <link rel="stylesheet" href="style.css" /> <!--  route vers le fichier css-->
+    <script src="date.js"></script> <!--  lien vers page fonction JS pour avoir la date -->
+    <title>Meteo</title> <!--  Nom de la page dans le navigateur -->
+    
 </head>
 <body>
+    <div class="header">
+        <div class="logo">Meteo.</div>
+        <div class="date"><script>date();</script></div> <!--  fonction JS pour avoir la date en haut a droite-->
+    </div>
+    <div class="content">
+        <div class="content1">
+            <article>
+                <div class="ville"><?php echo readdernierevaleur($db,'city','api') ; ?></div> <!--  fonction qui appel la derniere localisation  fournis par l'API-->
+                <?php echo weather($db, 'weather', 'api') ; ?> <!--  fonction qui appel le dernier icone fournis par l'API-->
+                <p class="temp"><?php echo readdernierevaleur($db,'temp','api') ; ?> °C</p> <!--  fonction qui appel la derniere temperature  fournis par l'API-->
 
-    <table>
-        <tr>
-            <th>Heure</th>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-            <th>4</th>
-            <th>5</th>
-            <th>6</th>
-            <th>7</th>
-            <th>8</th>
-            <th>9</th>
-            <th>10</th>
-            <th>11</th>
-            <th>12</th>
-            <th>13</th>
-            <th>14</th>
-            <th>15</th>
-            <th>16</th>
-            <th>17</th>
-            <th>18</th>
-            <th>19</th>
-            <th>20</th>
-            <th>21</th>
-            <th>22</th>
-            <th>23</th>
-            <th>24</th>
+            </article>
+            <aside> <!-- Partie capteur -->
+                <h2>Capteur n°1</h2>  <!--  nom du capteur -->
+                <p>Temp interieur <?php echo readdernierevaleur($db,'temp','capteur');?> °C</p> <!--  fonction qui appel la derniere temperature fournis par le capteur-->
+                <p>Humidité <?php echo readdernierevaleur($db,'humidite','capteur');?> %</p> <!--  fonction qui appel la derniere humidite fournis par le capteur-->
+                <p>Pression <?php echo readdernierevaleur($db,'pression','capteur');?> hPa</p> <!--  fonction qui appel la derniere pression fournis par le capteur-->
+            </aside>
+        </div>
 
-        </tr>
-        <tr>
-            <td>Temp Int (°C)</td>
-            <td>28</td>
-            <td>28</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>28</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-
-        </tr>
-        <tr>
-            <td>Temp Ext (°C)</td>
-            <td>28</td>
-            <td>28</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>28</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-            <td>27</td>
-        </tr>
-        <tr>
-            <td>Humidité (%)</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-            <td>60</td>
-        </tr>
-        <tr>
-            <td>Pression (hPa)</td>
-            <td>1057</td>
-            <td>1054</td>
-            <td>1005</td>
-            <td>0056</td>
-            <td>0000</td>
-            <td>1534</td>
-            <td>1278</td>
-            <td>1027</td>
-            <td>1028</td>
-            <td>2286</td>
-            <td>7675</td>
-            <td>5567</td>
-            <td>990</td>
-            <td>6500</td>
-            <td>6042</td>
-            <td>6350</td>
-            <td>3354</td>
-            <td>3754</td>
-            <td>6054</td>
-            <td>6340</td>
-            <td>6650</td>
-            <td>6550</td>
-            <td>5550</td>
-            <td>5555</td>
-        </tr>
-    </table>
+    </div>
+    <section>
+        <h2>Historique:</h2>
+            <div class="test">
+                <?php
+                    $var = 0; // initialisation de la variable $var
+                    for ($j = 1; $j <= 7; $j++) { // Boucle qui repete 7 fois le tableau en modifiant la date a chaque fois
+                    $date = date('Y-m-d', time()-$var); // deterrmine la date dans l'historique // $var determine combien de seconde sont a retirer de la date
+                    echo '<div class="datehist">' . formatdate($date) . '</div>';
+                    echo historiquejour($db, $date); // appel fonction qui gere le tableau avec les données
+                    $var += 86400; // ajoute 86400 seconde a la variable $var
+                    }
+                ?>
+            </div>
+        
+    </section>
+    
 </body>
 </html>
