@@ -1,0 +1,220 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    background-image: url(../meteo/images/white-cloud.jpg);
+    background-size: cover;
+}
+
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    height: 70px;
+
+}
+
+.logo { 
+
+    height: 100px;
+    width: 50%;
+    margin-left: 8%;
+    font-size: 50px;
+}
+.date {
+    text-align: end;
+    width: 20%;
+    padding-right: 20px;
+    font-size: 20px;
+}
+.content{
+    display: flex;
+
+}
+.content1{
+
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+article{
+    margin-top: 20px;
+    margin-left: 5%;
+    height: 300px;
+    width: 30%;
+}
+.imagejour{
+    background-image: url(../meteo/images/sun.png);
+    background-size: cover;
+    margin-left: 15%;
+    width: 250px;
+    height: 250px;
+}
+.ville {
+    font-size: 40px;
+    margin-left: 20%;
+}
+.temp{
+    margin-left: 65%;
+    margin-top: -40%;
+    font-size: 30px;
+}
+
+aside{
+    backdrop-filter: blur(4px);
+    font-size: 20px;
+    margin-right: 5%;
+    background: rgba(245, 245, 245, 0.25);
+    height: 300px;
+    width: 300px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px rgba(0.25, 0.25, 0.25, 0.25);
+    padding-left: 5%;
+}
+p{
+    display: flex;
+    margin-top: 15%;
+}
+
+/* section { ///////////////////////////////////////////////////////////// Test a validé avec le groupe /////////////////
+    backdrop-filter: blur(3px);
+    box-shadow: 0px 4px 4px rgba(0.25, 0.25, 0.25, 0.25);
+    background: rgba(245, 245, 245, 0.25);
+    border-radius: 15px;
+    height: 230px;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 20px;
+} */
+
+section {
+    backdrop-filter: blur(3px);
+    box-shadow: 0px 4px 4px rgba(0.25, 0.25, 0.25, 0.25);
+    background: rgba(245, 245, 245, 0.25);
+    border-radius: 15px;
+    font-size: 15px;
+    height: auto;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 20px;
+}
+
+
+.datehist{
+    font-size: 18px;
+    margin-top: 35px;
+    margin-bottom: -1%;
+}
+
+h2{
+    padding-top: 1%;
+    margin-left: 10%;
+    font-size: 20px;
+
+}
+
+.liste{
+    display: flex;
+    flex-wrap: wrap;
+    height: 66%;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.artliste {
+    display: flex;
+    flex-wrap: wrap;
+    background: rgba(245, 245, 245, 0.50);
+    border-radius: 30px;
+    width: 20%;
+    margin-left: 4%;
+}
+h4{
+    margin-left: 8%;
+}
+
+.ordre{
+
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -5%;
+    height: 100%;
+    width: 100%;
+}
+.imagemeteo{
+    background-image: url(../meteo/images/kisspng-weather-forecasting-weather-map-overcast-cloud-aplikasi-di-google-play-5bed1f3b1b1ce5.0169022915422666831111\(1\).png);
+    background-size: cover;
+    margin-left: 10%;
+    height: 100px;
+    width: 100px;
+}
+.listep{
+    margin-top: -45%;
+    height: 100%;
+    width: 50%;
+    padding-left: 55%;
+}
+.aboutus{
+    padding-top: 5px;
+    text-align: end;
+    margin-right: 10px;
+}
+
+.historique{
+ margin-left: 5%;
+ padding-bottom: 20px;
+}
+
+/*--------------  Case  ---------------- */
+
+.imagejourclearsky{
+    background-image: url(../meteo/images/sun.png);
+    background-size: cover;
+    margin-left: 15%;
+    width: 250px;
+    height: 250px;
+}
+.imagejoursuncloud{
+    background-image: url(../meteo/images/suncloud.png);
+    background-size: cover;
+    margin-left: 15%;
+    width: 250px;
+    height: 250px;
+}
+.imagejourcloud{
+    background-image: url(../meteo/images/cloud.png);
+    background-size: cover;
+    margin-left: 15%;
+    width: 250px;
+    height: 250px;
+}
+.imagejourrain{
+    background-image: url(../meteo/images/rain.png);
+    background-size: cover;
+    margin-left: 15%;
+    width: 250px;
+    height: 250px;
+}
+.imagejourthunderstorm{
+    background-image: url(../meteo/images/storm.png);
+    background-size: cover;
+    margin-left: 15%;
+    width: 250px;
+    height: 250px;
+}
+.imagejoursnow{
+    background-image: url(../meteo/images/snow.png);
+    background-size: cover;
+    margin-left: 15%;
+    width: 250px;
+    height: 250px;
+}
+.imagejourmist{
+    background-image: url(../meteo/images/mist.png);
+    background-size: cover;
+    margin-left: 15%;
+    width: 250px;
+    height: 250px;
+}
