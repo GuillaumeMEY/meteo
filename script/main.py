@@ -1,6 +1,7 @@
 from database import Database
 from api_weather import ApiWeather
 from api_geo_loc import ApiGeoLoc
+from sensor import Sensor
 
 """
     Algo:
@@ -33,6 +34,7 @@ def main():
     database = Database()
     api_weather = ApiWeather()
     api_geo_loc = ApiGeoLoc()
+    sensor = Sensor()
     
 
     my_ip = api_geo_loc.get_public_addr()
@@ -45,14 +47,17 @@ def main():
     print(api_weather_response)
     weather_data = data_extraction(api_weather_response)
     
+    # Getting data from the sensor
+    data_sensor = sensor.get_data()
     
     data = [
          ("temp", weather_data['temp'], "api"),
          ("humidity", weather_data['humidity'], "api"),
          ("pression", weather_data['pressure'], "api"),
-         ("weather", weather_data['weather'], "api")
-         
-         #Sensor data here 
+         ("weather", weather_data['weather'], "api"),
+         ("temp", data_sensor['temp'], "sensor"),
+         ("humidity", data_sensor['humidity'], "sensor"),
+         ("pressure", data_sensor['pressure'], "sensor"),
      ]
     
     database.insert_into_Measures(data)
