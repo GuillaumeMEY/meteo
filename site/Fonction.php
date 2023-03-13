@@ -6,9 +6,9 @@ $db = new PDO('mysql:host=localhost;dbname=weather;charset=utf8','cesi','cesi');
 
 // Recherche les derniere valeur enregistré en fonction du type et de la source choisi ----  /!\ il faut que les données soit toute entré en memme temp /!\ 
 function readDerniereValeur($db, $type, $source){
-    $r = $db->query("SELECT value FROM Measures WHERE created_at = ( SELECT MAX( created_at ) FROM Measures) and type  = '$type' and source = '$source'");
+    $r = $db->query("SELECT valeur FROM measures WHERE created_at = ( SELECT MAX( created_at ) FROM measures) and type  = '$type' and source = '$source'");
     $recherche = $r->fetch(PDO::FETCH_OBJ); //  fait une recherche objet
-    return $recherche->valeur; // Recupere la value
+    return $recherche->valeur; // Recupere la valeur
 }
 
 
@@ -53,7 +53,7 @@ function weather($db, $meteo, $source){
 
 // Fonction qui va chercher les données d'un type d'une journée defini par $date et le met dans un tableau
 function readValeursUnJour($db, $date, $type, $source) {
-    $r = $db->query("SELECT value FROM Measures WHERE created_at BETWEEN '$date 00:01' AND '$date 23:59' and type = '$type' and source = '$source'"); // Selectionne les données
+    $r = $db->query("SELECT value FROM measures WHERE created_at BETWEEN '$date 00:01' AND '$date 23:59' and type = '$type' and source = '$source'"); // Selectionne les données
     $recherche = $r->fetchAll(PDO::FETCH_OBJ);
     $valeurs = array(); // creation du tableau
     foreach ($recherche as $objet) { // met dans le tableau chaque donnée grace au foreach
@@ -68,9 +68,9 @@ function historiqueJour($db, $date){
     $temperatureapi = readValeursUnJour($db, $date, 'temp', 'api'); // Recupere chaque tableau de valeur demandé
     $humiditeapi = readValeursUnJour($db, $date, 'humidite', 'api'); // Recupere chaque tableau de valeur demandé
     $pressionapi = readValeursUnJour($db, $date, 'pression', 'api'); // Recupere chaque tableau de valeur demandé
-    $humiditecap = readValeursUnJour($db, $date, 'humidite', 'capteur'); // Recupere chaque tableau de valeur demandé
-    $temperaturecap = readValeursUnJour($db, $date, 'temp', 'capteur'); // Recupere chaque tableau de valeur demandé
-    $pressioncap = readValeursUnJour($db, $date, 'pression', 'capteur'); // Recupere chaque tableau de valeur demandé
+    $humiditecap = readValeursUnJour($db, $date, 'humidite', 'sensor'); // Recupere chaque tableau de valeur demandé
+    $temperaturecap = readValeursUnJour($db, $date, 'temp', 'sensor'); // Recupere chaque tableau de valeur demandé
+    $pressioncap = readValeursUnJour($db, $date, 'pression', 'sensor'); // Recupere chaque tableau de valeur demandé
 
     // Genere un tableau et chaque foreach le rempli grace au fonction readValeursUnJour qui sont juste au dessu
     echo "<table>

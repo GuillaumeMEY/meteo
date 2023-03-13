@@ -28,9 +28,9 @@
             </article>
             <aside> <!-- Partie capteur -->
                 <h2>Capteur n°1</h2>  <!--  nom du capteur -->
-                <p>Temp interieur <?php echo readDerniereValeur($db,'temp','capteur');?> °C</p> <!--  fonction qui appel la derniere temperature fournis par le capteur-->
-                <p>Humidité <?php echo readDerniereValeur($db,'humidite','capteur');?> %</p> <!--  fonction qui appel la derniere humidite fournis par le capteur-->
-                <p>Pression <?php echo readDerniereValeur($db,'pression','capteur');?> hPa</p> <!--  fonction qui appel la derniere pression fournis par le capteur-->
+                <p>Temp interieur <?php echo readDerniereValeur($db,'temp','sensor');?> °C</p> <!--  fonction qui appel la derniere temperature fournis par le capteur-->
+                <p>Humidité <?php echo readDerniereValeur($db,'humidite','sensor');?> %</p> <!--  fonction qui appel la derniere humidite fournis par le capteur-->
+                <p>Pression <?php echo readDerniereValeur($db,'pression','sensor');?> hPa</p> <!--  fonction qui appel la derniere pression fournis par le capteur-->
             </aside>
         </div>
 
