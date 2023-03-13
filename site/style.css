@@ -1,7 +1,7 @@
-body{
+.body{
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
-    background-image: url(../meteo/images/white-cloud.jpg);
+    background-image: url(./images/white-cloud.jpg);
     background-size: cover;
 }
 
@@ -45,13 +45,7 @@ article{
     height: 300px;
     width: 30%;
 }
-.imagejour{
-    background-image: url(../meteo/images/sun.png);
-    background-size: cover;
-    margin-left: 15%;
-    width: 250px;
-    height: 250px;
-}
+
 .ville {
     font-size: 40px;
     margin-left: 20%;
@@ -77,17 +71,6 @@ p{
     display: flex;
     margin-top: 15%;
 }
-
-/* section { ///////////////////////////////////////////////////////////// Test a validé avec le groupe /////////////////
-    backdrop-filter: blur(3px);
-    box-shadow: 0px 4px 4px rgba(0.25, 0.25, 0.25, 0.25);
-    background: rgba(245, 245, 245, 0.25);
-    border-radius: 15px;
-    height: 230px;
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 20px;
-} */
 
 section {
     backdrop-filter: blur(3px);
@@ -115,53 +98,6 @@ h2{
 
 }
 
-.liste{
-    display: flex;
-    flex-wrap: wrap;
-    height: 66%;
-    width: 90%;
-    margin-left: 5%;
-}
-
-.artliste {
-    display: flex;
-    flex-wrap: wrap;
-    background: rgba(245, 245, 245, 0.50);
-    border-radius: 30px;
-    width: 20%;
-    margin-left: 4%;
-}
-h4{
-    margin-left: 8%;
-}
-
-.ordre{
-
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: -5%;
-    height: 100%;
-    width: 100%;
-}
-.imagemeteo{
-    background-image: url(../meteo/images/kisspng-weather-forecasting-weather-map-overcast-cloud-aplikasi-di-google-play-5bed1f3b1b1ce5.0169022915422666831111\(1\).png);
-    background-size: cover;
-    margin-left: 10%;
-    height: 100px;
-    width: 100px;
-}
-.listep{
-    margin-top: -45%;
-    height: 100%;
-    width: 50%;
-    padding-left: 55%;
-}
-.aboutus{
-    padding-top: 5px;
-    text-align: end;
-    margin-right: 10px;
-}
-
 .historique{
  margin-left: 5%;
  padding-bottom: 20px;
@@ -170,51 +106,102 @@ h4{
 /*--------------  Case  ---------------- */
 
 .imagejourclearsky{
-    background-image: url(../meteo/images/sun.png);
+    background-image: url(./images/sun.png);
     background-size: cover;
     margin-left: 15%;
     width: 250px;
     height: 250px;
 }
 .imagejoursuncloud{
-    background-image: url(../meteo/images/suncloud.png);
+    background-image: url(./images/suncloud.png);
     background-size: cover;
     margin-left: 15%;
     width: 250px;
     height: 250px;
 }
 .imagejourcloud{
-    background-image: url(../meteo/images/cloud.png);
+    background-image: url(./images/cloud.png);
     background-size: cover;
     margin-left: 15%;
     width: 250px;
     height: 250px;
 }
 .imagejourrain{
-    background-image: url(../meteo/images/rain.png);
+    background-image: url(./images/rain.png);
     background-size: cover;
     margin-left: 15%;
     width: 250px;
     height: 250px;
 }
 .imagejourthunderstorm{
-    background-image: url(../meteo/images/storm.png);
+    background-image: url(./images/storm.png);
     background-size: cover;
     margin-left: 15%;
     width: 250px;
     height: 250px;
 }
 .imagejoursnow{
-    background-image: url(../meteo/images/snow.png);
+    background-image: url(./images/snow.png);
     background-size: cover;
     margin-left: 15%;
     width: 250px;
     height: 250px;
 }
 .imagejourmist{
-    background-image: url(../meteo/images/mist.png);
+    background-image: url(./images/mist.png);
     background-size: cover;
     margin-left: 15%;
     width: 250px;
     height: 250px;
+}
+
+/*--------------  About Us  ---------------- */
+
+.body1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    background-size: cover;
+}
+.about{
+    margin-left: 10%;
+    justify-content: center;
+    gap:8%;
+    display: flex;
+    width: 80%;
+    height: 220px;
+
+}
+.photodav{
+    margin-top: 25px;
+    background-image: url(./images/david.jpg);
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+}
+.photonico{
+    margin-top: 25px;
+    background-image: url(./images/nicolas.JPG);
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+}
+.photogui{
+    margin-top: 25px;
+    background-image: url(./images/guillaume.jpg);
+    background-size: cover;
+    height: 220px;
+    width: 180px;
+}
+.text{
+    line-height: 350%;
+    margin-top: 25px;
+    height: 200px;
+    width: 40%;
+}
+.textnico{
+    line-height: 350%;
+    margin-top: 50px;
+    height: 200px;
+    width: 25%;
+
 }
