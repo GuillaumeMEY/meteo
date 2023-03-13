@@ -13,7 +13,7 @@
     <title>Meteo</title> <!--  Nom de la page dans le navigateur -->
     
 </head>
-<body>
+<body class="body">
     <div class="header">
         <div class="logo">Meteo.</div>
         <div class="date"><script>date();</script></div> <!--  fonction JS pour avoir la date en haut a droite-->
@@ -37,7 +37,7 @@
     </div>
     <section> <!-- Partie historique -->
         <h2>Historique:</h2>
-            <div class="test">
+            <div class="historique">
                 <?php
                     $var = 0; // initialisation de la variable $var à 0
 
@@ -54,6 +54,6 @@
             </div>
         
     </section>
-    
+    <div class="aboutus"> <a href="aboutus.php"> About us</a></div>
 </body>
 </html>
