@@ -1,12 +1,12 @@
 <?php
 
-$db = new PDO('mysql:host=localhost;dbname=Measures;charset=utf8','cesi','cesi'); // lien vers la BDD --- /!\ provisoire /!\ -----------
+$db = new PDO('mysql:host=localhost;dbname=weather;charset=utf8','cesi','cesi'); // lien vers la BDD --- /!\ provisoire /!\ -----------
 
 
 
 // Recherche les derniere valeur enregistré en fonction du type et de la source choisi ----  /!\ il faut que les données soit toute entré en memme temp /!\ 
 function readDerniereValeur($db, $type, $source){
-    $r = $db->query("SELECT value FROM meteo WHERE created_at = ( SELECT MAX( created_at ) FROM meteo) and type  = '$type' and source = '$source'");
+    $r = $db->query("SELECT value FROM Measures WHERE created_at = ( SELECT MAX( created_at ) FROM Measures) and type  = '$type' and source = '$source'");
     $recherche = $r->fetch(PDO::FETCH_OBJ); //  fait une recherche objet
     return $recherche->valeur; // Recupere la value
 }
@@ -53,7 +53,7 @@ function weather($db, $meteo, $source){
 
 // Fonction qui va chercher les données d'un type d'une journée defini par $date et le met dans un tableau
 function readValeursUnJour($db, $date, $type, $source) {
-    $r = $db->query("SELECT value FROM meteo WHERE created_at BETWEEN '$date 00:01' AND '$date 23:59' and type = '$type' and source = '$source'"); // Selectionne les données
+    $r = $db->query("SELECT value FROM Measures WHERE created_at BETWEEN '$date 00:01' AND '$date 23:59' and type = '$type' and source = '$source'"); // Selectionne les données
     $recherche = $r->fetchAll(PDO::FETCH_OBJ);
     $valeurs = array(); // creation du tableau
     foreach ($recherche as $objet) { // met dans le tableau chaque donnée grace au foreach
