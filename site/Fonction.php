@@ -57,7 +57,7 @@ function readValeursUnJour($db, $date, $type, $source) {
     $recherche = $r->fetchAll(PDO::FETCH_OBJ);
     $valeurs = array(); // creation du tableau
     foreach ($recherche as $objet) { // met dans le tableau chaque donnée grace au foreach
-    $valeurs[] = $objet->valeur;
+    $valeurs[] = $objet->value;
     }
     return $valeurs; // Retourne le tableau rempli
 }
@@ -66,9 +66,9 @@ function readValeursUnJour($db, $date, $type, $source) {
 // fonction qui affiche l'historique d'un jour grace a sa date, fonction un peu trop grande ?
 function historiqueJour($db, $date){
     $temperatureapi = readValeursUnJour($db, $date, 'temp', 'api'); // Recupere chaque tableau de valeur demandé
-    $humiditeapi = readValeursUnJour($db, $date, 'humidity', 'api'); // Recupere chaque tableau de valeur demandé
+    $humiditeapi = readValeursUnJour($db, $date, 'humidite', 'api'); // Recupere chaque tableau de valeur demandé
     $pressionapi = readValeursUnJour($db, $date, 'pression', 'api'); // Recupere chaque tableau de valeur demandé
-    $humiditecap = readValeursUnJour($db, $date, 'humidity', 'sensor'); // Recupere chaque tableau de valeur demandé
+    $humiditecap = readValeursUnJour($db, $date, 'humidite', 'sensor'); // Recupere chaque tableau de valeur demandé
     $temperaturecap = readValeursUnJour($db, $date, 'temp', 'sensor'); // Recupere chaque tableau de valeur demandé
     $pressioncap = readValeursUnJour($db, $date, 'pression', 'sensor'); // Recupere chaque tableau de valeur demandé
 
