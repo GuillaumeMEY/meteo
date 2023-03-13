@@ -21,75 +21,39 @@
     <div class="content">
         <div class="content1">
             <article>
-                <div class="ville"><?php echo readdernierevaleur($db,'city','api') ; ?></div> <!--  fonction qui appel la derniere localisation  fournis par l'API-->
+                <div class="ville"><?php echo readDerniereValeur($db,'city','api') ; ?></div> <!--  fonction qui appel la derniere localisation  fournis par l'API-->
                 <?php echo weather($db, 'weather', 'api') ; ?> <!--  fonction qui appel le dernier icone fournis par l'API-->
-                <p class="temp"><?php echo readdernierevaleur($db,'temp','api') ; ?> °C</p> <!--  fonction qui appel la derniere temperature  fournis par l'API-->
+                <p class="temp"><?php echo readDerniereValeur($db,'temp','api') ; ?> °C</p> <!--  fonction qui appel la derniere temperature  fournis par l'API-->
 
             </article>
             <aside> <!-- Partie capteur -->
                 <h2>Capteur n°1</h2>  <!--  nom du capteur -->
-                <p>Temp interieur <?php echo readdernierevaleur($db,'temp','capteur');?> °C</p> <!--  fonction qui appel la derniere temperature fournis par le capteur-->
-                <p>Humidité <?php echo readdernierevaleur($db,'humidite','capteur');?> %</p> <!--  fonction qui appel la derniere humidite fournis par le capteur-->
-                <p>Pression <?php echo readdernierevaleur($db,'pression','capteur');?> hPa</p> <!--  fonction qui appel la derniere pression fournis par le capteur-->
+                <p>Temp interieur <?php echo readDerniereValeur($db,'temp','capteur');?> °C</p> <!--  fonction qui appel la derniere temperature fournis par le capteur-->
+                <p>Humidité <?php echo readDerniereValeur($db,'humidite','capteur');?> %</p> <!--  fonction qui appel la derniere humidite fournis par le capteur-->
+                <p>Pression <?php echo readDerniereValeur($db,'pression','capteur');?> hPa</p> <!--  fonction qui appel la derniere pression fournis par le capteur-->
             </aside>
         </div>
 
     </div>
-    <section>
+    <section> <!-- Partie historique -->
         <h2>Historique:</h2>
-        <div class="liste"> <!-- Liste historique -->
+            <div class="test">
+                <?php
+                    $var = 0; // initialisation de la variable $var à 0
+
+                    for ($j = 1; $j <= 10; $j++) { // Boucle qui repete 10 fois le tableau en modifiant la date a chaque fois
+                        $date = date('Y-m-d', time()-$var); // deterrmine la date dans l'historique // $var determine combien de seconde sont a retirer de la date du jour
+                        
+                        echo '<div class="datehist">' . formatDate($date) . '</div>'; // Ecris les jours concerné pour chaque tableaux
+
+                        echo historiqueJour($db, $date); // appel fonction qui gere chaque tableau avec les 
+                        
+                        $var += 86400; // ajoute 86400 seconde a la variable $var pour chaque jour
+                    }
+                ?>
+            </div>
         
-            <div class="artliste"> <!-- Faire une fonction/boucle pour la liste -->
-                <h4>Jeudi 26 Janvier</h4>
-
-                    <div class="ordre">
-                        <div class="imagemeteo"> </div> <!--  fonction a faire, selection de l'image -->
-                        <div class="listep">
-                            <p>Int 17 °C</p> <!--  fonction a faire-->
-                            <p>Ext 25 °C</p> <!--  fonction a faire-->
-                    </div>
-                </div>
-            </div>
-
-            <!-- delete apres boucle  a partir de la -->
-            <div class="artliste"> 
-                <h4>Mercredi 24 Janvier</h4> 
-
-                    <div class="ordre">
-                        <div class="imagemeteo"> </div>
-                        <div class="listep"> 
-                            <p>Int 17 °C</p> 
-                            <p>Ext 25 °C</p> 
-                    </div>
-                </div>
-            </div>
-            <div class="artliste">  
-                <h4>Mardi 23 Janvier</h4> 
-
-                    <div class="ordre">
-                        <div class="imagemeteo"> </div> 
-                        <div class="listep">
-                            <p>Int 17 °C</p>
-                            <p>Ext 25 °C</p>
-                    </div>
-                </div>
-            </div>
-            <div class="artliste"> 
-                <h4>Lundi 22 Janvier</h4>
-
-                    <div class="ordre"> 
-                        <div class="imagemeteo">
-                        <div class="listep"> 
-                            <p>Int 17 °C</p>  
-                            <p>Ext 25 °C</p> 
-                    </div>
-                </div>
-            </div>
-            <!-- delete jusque la -->
-
-
     </section>
-    <div class="aboutus">About Us</div>
     
 </body>
 </html>

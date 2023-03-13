@@ -5,22 +5,16 @@ $db = new PDO('mysql:host=localhost;dbname=meteo;charset=utf8','root',''); // li
 
 
 // Recherche les derniere valeur enregistré en fonction du type et de la source choisi ----  /!\ il faut que les données soit toute entré en memme temp /!\ 
-function readdernierevaleur($db, $type, $source){
+function readDerniereValeur($db, $type, $source){
     $r = $db->query("SELECT valeur FROM meteo WHERE created_at = ( SELECT MAX( created_at ) FROM meteo) and type  = '$type' and source = '$source'");
     $recherche = $r->fetch(PDO::FETCH_OBJ); //  fait une recherche objet
     return $recherche->valeur; // Recupere la valeur
 }
 
-// Reccherche la derniere date entré dans la bdd
-function readjour($db, $source){
-    $r = $db->query("SELECT created_at FROM meteo WHERE created_at = ( SELECT MAX( created_at ) FROM meteo) and source = '$source'");
-    $recherche = $r->fetch(PDO::FETCH_OBJ);
-    return $recherche->created_at; // Recupere la derniere date entré dans la bdd
-}
 
 // Fonction qui attribu l'icone meteo fournie par l'api OWM
 function weather($db, $meteo, $source){ 
-    $weather = readdernierevaleur($db, 'weather', 'api'); // transforme la valeur weather de la bdd en variable
+    $weather = readDerniereValeur($db, 'weather', 'api'); // transforme la valeur weather de la bdd en variable // a netooyer
     
     switch ($weather) { // utilise la variable pour definir l'icone
         case 'clear sky' :
@@ -57,7 +51,7 @@ function weather($db, $meteo, $source){
 }
 
 // Fonction qui va chercher les données d'un type d'une journée defini par $date et le met dans un tableau
-function readvaleursunjour($db, $date, $type, $source) {
+function readValeursUnJour($db, $date, $type, $source) {
     $r = $db->query("SELECT valeur FROM meteo WHERE created_at BETWEEN '$date 00:01' AND '$date 23:59' and type = '$type' and source = '$source'");
     $recherche = $r->fetchAll(PDO::FETCH_OBJ);
     $valeurs = array(); // creation du tableau
@@ -68,17 +62,19 @@ function readvaleursunjour($db, $date, $type, $source) {
 }
 
 // fonction qui affiche l'historique d'un jour grace a sa date, fonction un peu trop grande ?
-function historiquejour($db, $date){
-    $temperatureapi = readvaleursunjour($db, $date, 'temp', 'api');
-    $humiditeapi = readvaleursunjour($db, $date, 'humidite', 'api');
-    $pressionapi = readvaleursunjour($db, $date, 'pression', 'api');
-    $humiditecap = readvaleursunjour($db, $date, 'humidite', 'capteur');
-    $temperaturecap = readvaleursunjour($db, $date, 'temp', 'capteur');
-    $pressioncap = readvaleursunjour($db, $date, 'pression', 'capteur');
+function historiqueJour($db, $date){
+    $temperatureapi = readValeursUnJour($db, $date, 'temp', 'api'); // Recupere chaque tableau de valeur demandé
+    $humiditeapi = readValeursUnJour($db, $date, 'humidite', 'api'); // Recupere chaque tableau de valeur demandé
+    $pressionapi = readValeursUnJour($db, $date, 'pression', 'api'); // Recupere chaque tableau de valeur demandé
+    $humiditecap = readValeursUnJour($db, $date, 'humidite', 'capteur'); // Recupere chaque tableau de valeur demandé
+    $temperaturecap = readValeursUnJour($db, $date, 'temp', 'capteur'); // Recupere chaque tableau de valeur demandé
+    $pressioncap = readValeursUnJour($db, $date, 'pression', 'capteur'); // Recupere chaque tableau de valeur demandé
+
+    // Genere un tableau et chaque foreach le rempli grace au fonction readValeursUnJour qui sont juste au dessu
     echo "<table>
             <tbody>
                 <tr>";
-                    echo '<td>' . 'Heure' . '</td>';
+                    echo '<td>' . 'Heure de la journée' . '</td>'; // genere une suite de chiffre de 1 a 24 qui representent les heures de la journée
                     for ($i = 1; $i <= 24; $i++) {
                         echo '<td>' . $i . '</td>';
                     }
@@ -124,7 +120,8 @@ function historiquejour($db, $date){
         </table>";
 }
 
-function formatdate($date){
+// Change le format de la date /!\ Verifier si elle est deprecated
+function formatDate($date){
     setlocale(LC_TIME, 'FR.utf8'); // définir la locale française
     $date_fr = ucfirst(strftime('%A', strtotime($date))) . ' ' . date('j', strtotime($date)) . ' ' . strftime('%B', strtotime($date)); // formater la date dans le format désiré
     return $date_fr; // afficher la date formatée
