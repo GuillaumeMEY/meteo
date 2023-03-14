@@ -49,15 +49,17 @@ def main():
     
     # Getting data from the sensor
     data_sensor = sensor.get_data()
+    print(data_sensor)
     
     data = [
+         ("city", my_city["name"], "api"),
          ("temp", weather_data['temp'], "api"),
          ("humidity", weather_data['humidity'], "api"),
          ("pression", weather_data['pressure'], "api"),
          ("weather", weather_data['weather'], "api"),
          ("temp", data_sensor['temp'], "sensor"),
          ("humidity", data_sensor['humidity'], "sensor"),
-         ("pressure", data_sensor['pressure'], "sensor"),
+         ("pression", data_sensor['pressure'], "sensor"),
      ]
     
     database.insert_into_Measures(data)
