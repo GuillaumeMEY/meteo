@@ -8,7 +8,7 @@ $db = new PDO('mysql:host=localhost;dbname=weather;charset=utf8','cesi','cesi');
 function readDerniereValeur($db, $type, $source){
     $r = $db->query("SELECT value FROM Measures WHERE created_at = ( SELECT MAX( created_at ) FROM Measures) and type  = '$type' and source = '$source'");
     $recherche = $r->fetch(PDO::FETCH_OBJ); //  fait une recherche objet
-    return $recherche->valeur; // Recupere la value
+    return $recherche->value; // Recupere la valeur
 }
 
 
@@ -17,36 +17,37 @@ function weather($db, $meteo, $source){
     $weather = readDerniereValeur($db, 'weather', 'api'); // transforme la valeur weather de la bdd en variable // a netooyer
     
     switch ($weather) { // utilise la variable pour definir l'icone
-        case 'clear sky' :
+        case 'Clear' :
             echo '<div class="imagejourclearsky"></div>';
             break;
-        case 'few clouds' :
+        case 'Clouds' :
             echo '<div class="imagejoursuncloud"></div>';
             break;
-        case 'scattered clouds' :
-            echo '<div class="imagejourcloud"></div>';
-            break;
-        case 'broken clouds' :
-            echo '<div class="imagejourcloud"></div>';
-            break;
-        case 'shower rain' :
-            echo '<div class="imagejourrain"></div>';
-            break;
-        case 'rain' :
+
+        case 'Drizzle' :
             echo '<div class="imagejourrain"></div>';
             break;
 
-        case 'thunderstorm ' :
+        case 'Rain' :
+            echo '<div class="imagejourrain"></div>';
+            break;
+
+        case 'Thunderstorm ' :
             echo '<div class="imagejourthunderstorm"></div>';
             break;
 
-        case 'snow ' :
+        case 'Snow ' :
             echo '<div class="imagejoursnow"></div>';
             break;
 
-        case 'mist' :
+        case 'Mist' :
             echo '<div class="imagejourmist"></div>';
             break;
+        
+        default:
+            echo '<div class="imagejoursuncloud"></div>';
+            break;
+
     }
 }
 
@@ -57,7 +58,7 @@ function readValeursUnJour($db, $date, $type, $source) {
     $recherche = $r->fetchAll(PDO::FETCH_OBJ);
     $valeurs = array(); // creation du tableau
     foreach ($recherche as $objet) { // met dans le tableau chaque donnée grace au foreach
-    $valeurs[] = $objet->valeur;
+    $valeurs[] = $objet->value;
     }
     return $valeurs; // Retourne le tableau rempli
 }
@@ -66,11 +67,11 @@ function readValeursUnJour($db, $date, $type, $source) {
 // fonction qui affiche l'historique d'un jour grace a sa date, fonction un peu trop grande ?
 function historiqueJour($db, $date){
     $temperatureapi = readValeursUnJour($db, $date, 'temp', 'api'); // Recupere chaque tableau de valeur demandé
-    $humiditeapi = readValeursUnJour($db, $date, 'humidite', 'api'); // Recupere chaque tableau de valeur demandé
+    $humiditeapi = readValeursUnJour($db, $date, 'humidity', 'api'); // Recupere chaque tableau de valeur demandé
     $pressionapi = readValeursUnJour($db, $date, 'pression', 'api'); // Recupere chaque tableau de valeur demandé
-    $humiditecap = readValeursUnJour($db, $date, 'humidite', 'capteur'); // Recupere chaque tableau de valeur demandé
-    $temperaturecap = readValeursUnJour($db, $date, 'temp', 'capteur'); // Recupere chaque tableau de valeur demandé
-    $pressioncap = readValeursUnJour($db, $date, 'pression', 'capteur'); // Recupere chaque tableau de valeur demandé
+    $humiditecap = readValeursUnJour($db, $date, 'humidity', 'sensor'); // Recupere chaque tableau de valeur demandé
+    $temperaturecap = readValeursUnJour($db, $date, 'temp', 'sensor'); // Recupere chaque tableau de valeur demandé
+    $pressioncap = readValeursUnJour($db, $date, 'pression', 'sensor'); // Recupere chaque tableau de valeur demandé
 
     // Genere un tableau et chaque foreach le rempli grace au fonction readValeursUnJour qui sont juste au dessu
     echo "<table>
