@@ -11,11 +11,9 @@
     flex-wrap: wrap;
     justify-content:space-between;
     height: 70px;
-
 }
 
-.logo { 
-
+.logo {
     height: 100px;
     width: 50%;
     margin-left: 8%;
@@ -29,7 +27,6 @@
 }
 .content{
     display: flex;
-
 }
 .content1{
 
@@ -38,14 +35,12 @@
     width: 100%;
     justify-content: space-between;
 }
-
 article{
     margin-top: 20px;
     margin-left: 5%;
     height: 300px;
     width: 30%;
 }
-
 .ville {
     font-size: 40px;
     margin-left: 20%;
@@ -55,7 +50,6 @@ article{
     margin-top: -40%;
     font-size: 30px;
 }
-
 aside{
     backdrop-filter: blur(4px);
     font-size: 20px;
@@ -95,7 +89,6 @@ h2{
     padding-top: 1%;
     margin-left: 10%;
     font-size: 20px;
-
 }
 
 .historique{
@@ -178,7 +171,6 @@ a{
     display: flex;
     width: 80%;
     height: 220px;
-
 }
 .photodav{
     margin-top: 25px;
@@ -203,7 +195,6 @@ a{
     background-size: cover;
     height: 220px;
     width: 180px;
-
 }
 .text{
     line-height: 350%;
@@ -216,5 +207,4 @@ a{
     margin-top: 50px;
     height: 200px;
     width: 25%;
-
 }
