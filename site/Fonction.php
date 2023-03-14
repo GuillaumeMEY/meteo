@@ -17,21 +17,17 @@ function weather($db, $meteo, $source){
     $weather = readDerniereValeur($db, 'weather', 'api'); // transforme la valeur weather de la bdd en variable
     
     switch ($weather) { // utilise la variable pour definir l'icone
-        case 'Clear sky' :
+        case 'Clear' :
             echo '<div class="imagejourclearsky"></div>';
             break;
-        case 'Few clouds' :
+        case 'Clouds' :
             echo '<div class="imagejoursuncloud"></div>';
             break;
-        case 'Scattered clouds' :
-            echo '<div class="imagejourcloud"></div>';
-            break;
-        case 'Broken clouds' :
-            echo '<div class="imagejourcloud"></div>';
-            break;
-        case 'Shower rain' :
+
+        case 'Drizzle' :
             echo '<div class="imagejourrain"></div>';
             break;
+
         case 'Rain' :
             echo '<div class="imagejourrain"></div>';
             break;
@@ -47,6 +43,11 @@ function weather($db, $meteo, $source){
         case 'Mist' :
             echo '<div class="imagejourmist"></div>';
             break;
+        
+        default:
+            echo '<div class="imagejoursuncloud"></div>';
+            break;
+
     }
 }
 
