@@ -17,8 +17,8 @@
         </div>
         <div class="text">
             Travail au Departement des Pyrénées-Atlantiques <br>
-            Développeur back end <br>
-            Technologie: Laravel, Javascript 
+            Développeur Front et Backend <br>
+            Technologies: Laravel, Javascript 
         </div>
 
     </div>
@@ -26,8 +26,8 @@
 
         <div class="text">
             Travail chez YUKAN INNOVATE <br>
-            Développeur back end <br>
-            Technologie: Laravel, Javascript 
+            Développeur Front et Backend <br>
+            Technologies: Typescript, Angular, NestJS, Python 
         </div>
         <div class="photonico">
             
@@ -40,8 +40,8 @@
         </div>
         <div class="text">
             Travail chez CGI <br>
-            Développeur back end <br>
-            Technologie: Laravel, Javascript 
+            Développeur Low code <br>
+            Technologies: Run My Process, Apsscript 
         </div>
 
     </div>
