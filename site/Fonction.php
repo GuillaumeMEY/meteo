@@ -1,6 +1,6 @@
 <?php
 
-$db = new PDO('mysql:host=localhost;dbname=weather;charset=utf8','root',''); // lien vers la BDD
+$db = new PDO('mysql:host=localhost;dbname=weather;charset=utf8','cesi','cesi'); // lien vers la BDD
 
 
 
