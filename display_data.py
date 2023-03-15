@@ -2,6 +2,7 @@ import smbus
 import smbus2
 import bme280
 import time
+import datetime
 
 # Define some device parameters
 I2C_ADDR  = 0x27 # I2C device address
@@ -82,6 +83,36 @@ def lcd_string(message,line):
   for i in range(LCD_WIDTH):
     lcd_byte(ord(message[i]),LCD_CHR)
 
+def clear_screen():
+  lcd_string("",LCD_LINE_1)
+  lcd_string("",LCD_LINE_2)
+
+def get_hour():
+    # Obtenir l'heure actuelle
+    now = datetime.datetime.now()
+    return now.strftime("%H:%M")
+
+def get_date():
+    # Obtenir la date actuelle
+    today = datetime.date.today()
+
+		######## JOUR ########  
+		# Retourne le jour actuel en nombre
+    today_number = today.weekday()
+    # Obtenir le jour de la semaine (0 = lundi, 6 = dimanche)
+    week_day_array = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche']
+    today_day = week_day_array[today_number]
+
+		######## MOIS ########
+    # Obtenir le mois actuel (1 à 12)
+    month = today.month
+    # Afficher le mois
+    month_array = ['', 'janvier', 'février', 'mars', 'avril', 'mai', 'juin','juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
+
+    return "{} {} {}".format(today_day, today_number, month_array[month])
+    
+    # Afficher le jour de la semaine
+
 def main():
   # Main program block
 
@@ -90,25 +121,51 @@ def main():
 
   while True:
 
+		# Affichage de l'heure
+    # lcd_string("{}".format(get_date().capitalize()),LCD_LINE_1)
+    # lcd_string("     {}     ".format(get_hour()),LCD_LINE_2)
+    # time.sleep(5)
+
+    # Présentation de l'équipe
+    lcd_string("Nicolas",LCD_LINE_1)
+    time.sleep(.35)
+    lcd_string("   Guillaume",LCD_LINE_2)
+    time.sleep(.35)
+    lcd_string("Nicolas    David",LCD_LINE_1)
+    time.sleep(1.2)
+    clear_screen()
+    time.sleep(.75)
+    ###############################
+    lcd_string("   Guillaume",LCD_LINE_2)
+    lcd_string("Nicolas    David",LCD_LINE_1)
+    time.sleep(3)
+    clear_screen()
+
     data = bme280.sample(bus, address)
-    # Send some text
-    ########## TEMPERATURE ########## 
-    # lcd_string("  Temperature ",LCD_LINE_1)
-    # time.sleep(DATA_DISPLAY_TIME)
-    # lcd_string(">    {:.2f}C    <".format(data.temperature),LCD_LINE_2)
-    # time.sleep(DATA_DISPLAY_TIME)
-    # lcd_string(" >   {:.2f}C   < ".format(data.temperature),LCD_LINE_2)
-    # time.sleep(DATA_DISPLAY_TIME)
-    # lcd_string("  >  {:.2f}C  <  ".format(data.temperature),LCD_LINE_2)
-    # time.sleep(DATA_DISPLAY_TIME)
-    # lcd_string("   > {:.2f}C <   ".format(data.temperature),LCD_LINE_2)
-    # time.sleep(DATA_DISPLAY_TIME)
-    # lcd_string("    >{:.2f}C<    ".format(data.temperature),LCD_LINE_2)
-    # time.sleep(DATA_DISPLAY_TIME*2)
+
+    # # Send some text
+    # ########## TEMPERATURE ########## 
+    lcd_string("  Temperature ",LCD_LINE_1)
+    time.sleep(1)
+    lcd_string("     {:.2f}C     ".format(data.temperature),LCD_LINE_2)
+    time.sleep(1)
+    lcd_string(">    {:.2f}C    <".format(data.temperature),LCD_LINE_2)
+    time.sleep(DATA_DISPLAY_TIME)
+    lcd_string(" >   {:.2f}C   < ".format(data.temperature),LCD_LINE_2)
+    time.sleep(DATA_DISPLAY_TIME)
+    lcd_string("  >  {:.2f}C  <  ".format(data.temperature),LCD_LINE_2)
+    time.sleep(DATA_DISPLAY_TIME)
+    lcd_string("   > {:.2f}C <   ".format(data.temperature),LCD_LINE_2)
+    time.sleep(DATA_DISPLAY_TIME)
+    lcd_string("    >{:.2f}C<    ".format(data.temperature),LCD_LINE_2)
+    time.sleep(DATA_DISPLAY_TIME*2)
+    clear_screen()
 
     ########## HUMIDITE ########## 
     lcd_string("    Humidite   ",LCD_LINE_1)
-    time.sleep(DATA_DISPLAY_TIME)
+    time.sleep(1)
+    lcd_string("     {:.2f}%     ".format(data.humidity),LCD_LINE_2)
+    time.sleep(1)
     lcd_string(">    {:.2f}%    <".format(data.humidity),LCD_LINE_2)
     time.sleep(DATA_DISPLAY_TIME)
     lcd_string(" >   {:.2f}%   < ".format(data.humidity),LCD_LINE_2)
@@ -119,10 +176,13 @@ def main():
     time.sleep(DATA_DISPLAY_TIME)
     lcd_string("    >{:.2f}%<    ".format(data.humidity),LCD_LINE_2)
     time.sleep(DATA_DISPLAY_TIME*2)
+    clear_screen()
 
     ########## PRESSION ########## 
     lcd_string("    Pression   ",LCD_LINE_1)
-    time.sleep(DATA_DISPLAY_TIME)
+    time.sleep(1)
+    lcd_string("    {:.2f}%    ".format(data.pressure),LCD_LINE_2)
+    time.sleep(1)
     lcd_string(">   {:.2f}%   <".format(data.pressure),LCD_LINE_2)
     time.sleep(DATA_DISPLAY_TIME)
     lcd_string(" >  {:.2f}%  < ".format(data.pressure),LCD_LINE_2)
@@ -130,7 +190,9 @@ def main():
     lcd_string("  > {:.2f}% <  ".format(data.pressure),LCD_LINE_2)
     time.sleep(DATA_DISPLAY_TIME)
     lcd_string("   >{:.2f}%<   ".format(data.pressure),LCD_LINE_2)
-    time.sleep(DATA_DISPLAY_TIME*2)
+    time.sleep(2)
+    clear_screen()
+    time.sleep(2)
 
 if __name__ == '__main__':
 
