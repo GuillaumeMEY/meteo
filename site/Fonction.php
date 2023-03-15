@@ -6,7 +6,7 @@ $db = new PDO('mysql:host=localhost;dbname=weather;charset=utf8','cesi','cesi');
 
 // Recherche les derniere valeur enregistré en fonction du type et de la source choisi ----  /!\ il faut que les données soit toute entré en memme temp /!\ 
 function readDerniereValeur($db, $type, $source){
-    $r = $db->query("SELECT value FROM measures WHERE created_at = ( SELECT MAX( created_at ) FROM measures) and type  = '$type' and source = '$source'");
+    $r = $db->query("SELECT value FROM Measures WHERE created_at = ( SELECT MAX( created_at ) FROM Measures) and type  = '$type' and source = '$source'");
     $recherche = $r->fetch(PDO::FETCH_OBJ); //  fait une recherche objet
     return $recherche->value; // Recupere la valeur
 }
