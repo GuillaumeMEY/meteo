@@ -27,8 +27,8 @@
 
             </article>
             <aside> <!-- Partie capteur -->
-                <h2>Capteur n°1</h2>  <!--  nom du capteur -->
-                <p>Temp interieur <?php echo readDerniereValeur($db,'temp','sensor');?> °C</p> <!--  fonction qui appel la derniere temperature fournis par le capteur-->
+                <h1>Capteur n°1</h1>  <!--  nom du capteur -->
+                <p>Température <?php echo readDerniereValeur($db,'temp','sensor');?> °C</p> <!--  fonction qui appel la derniere temperature fournis par le capteur-->
                 <p>Humidité <?php echo readDerniereValeur($db,'humidity','sensor');?> %</p> <!--  fonction qui appel la derniere humidite fournis par le capteur-->
                 <p>Pression <?php echo readDerniereValeur($db,'pression','sensor');?> hPa</p> <!--  fonction qui appel la derniere pression fournis par le capteur-->
             </aside>
@@ -41,7 +41,7 @@
                 <?php
                     $var = 0; // initialisation de la variable $var à 0
 
-                    for ($j = 1; $j <= 10; $j++) { // Boucle qui repete 10 fois le tableau en modifiant la date a chaque fois
+                    for ($j = 1; $j <= 4; $j++) { // Boucle qui repete 4 fois le tableau en modifiant la date a chaque fois
                         $date = date('Y-m-d', time()-$var); // deterrmine la date dans l'historique // $var determine combien de seconde sont a retirer de la date du jour
                         
                         echo '<div class="datehist">' . formatDate($date) . '</div>'; // Ecris les jours concerné pour chaque tableaux

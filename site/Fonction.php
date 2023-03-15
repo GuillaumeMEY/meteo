@@ -1,12 +1,12 @@
 <?php
 
-$db = new PDO('mysql:host=localhost;dbname=weather;charset=utf8','cesi','cesi'); // lien vers la BDD 
+$db = new PDO('mysql:host=localhost;dbname=weather;charset=utf8','root',''); // lien vers la BDD
 
 
 
 // Recherche les derniere valeur enregistré en fonction du type et de la source choisi ----  /!\ il faut que les données soit toute entré en memme temp /!\ 
 function readDerniereValeur($db, $type, $source){
-    $r = $db->query("SELECT value FROM measures WHERE created_at = ( SELECT MAX( created_at ) FROM measures) and type  = '$type' and source = '$source'");
+    $r = $db->query("SELECT value FROM Measures WHERE created_at = ( SELECT MAX( created_at ) FROM Measures) and type  = '$type' and source = '$source'");
     $recherche = $r->fetch(PDO::FETCH_OBJ); //  fait une recherche objet
     return $recherche->value; // Recupere la valeur
 }
@@ -14,7 +14,7 @@ function readDerniereValeur($db, $type, $source){
 
 // Fonction qui attribu l'icone meteo fournie par l'api OWM
 function weather($db, $meteo, $source){ 
-    $weather = readDerniereValeur($db, 'weather', 'api'); // transforme la valeur weather de la bdd en variable
+    $weather = readDerniereValeur($db, 'weather', 'api'); // transforme la valeur weather de la bdd en variable // a netooyer
     
     switch ($weather) { // utilise la variable pour definir l'icone
         case 'Clear' :
@@ -74,46 +74,46 @@ function historiqueJour($db, $date){
     $pressioncap = readValeursUnJour($db, $date, 'pression', 'sensor'); // Recupere chaque tableau de valeur demandé
 
     // Genere un tableau et chaque foreach le rempli grace au fonction readValeursUnJour qui sont juste au dessu
-    echo "<table>
+    echo "<table class='table'>
             <tbody>
                 <tr>";
-                    echo '<td>' . 'Heure de la journée' . '</td>'; // genere une suite de chiffre de 1 a 24 qui representent les heures de la journée
+                    echo '<th>' . 'Heure de la journée' . '</th>'; // genere une suite de chiffre de 1 a 24 qui representent les heures de la journée
                     for ($i = 1; $i <= 24; $i++) {
                         echo '<td>' . $i . '</td>';
                     }
     echo "      </tr>
                 <tr>";
-                    echo '<td>' . 'Température ( °C ) (OpenWeatherMap)' . '</td>'; // restitu le tableau de donnée recupéré précedement
+                    echo '<th>' . 'Température ( °C ) (OpenWeatherMap)' . '</th>';
                     foreach($temperatureapi as $tempapi){
                         echo '<td>' . $tempapi . '</td>';
                     }
     echo "      </tr>
                 <tr>";
-                    echo '<td>' . 'Humidite ( % ) (OpenWeatherMap)' . '</td>'; // restitu le tableau de donnée recupéré précedement
+                    echo '<th>' . 'Humidite ( % ) (OpenWeatherMap)' . '</th>';
                     foreach($humiditeapi as $humapi){
                         echo '<td>' . $humapi . '</td>';
                     }
     echo "      </tr>
                 <tr>";
-                    echo '<td>' . 'Pression ( hPa ) (OpenWeatherMap)' . '</td>'; // restitu le tableau de donnée recupéré précedement
+                    echo '<th>' . 'Pression ( hPa ) (OpenWeatherMap)' . '</th>';
                     foreach($pressionapi as $presapi){
                         echo '<td>' . $presapi . '</td>';
                     }
     echo "      </tr>
                 <tr>";
-                    echo '<td>' . 'Température ( °C ) (Capteur)' . '</td>'; // restitu le tableau de donnée recupéré précedement
+                    echo '<th>' . 'Température ( °C ) (Capteur)' . '</th>';
                     foreach($temperaturecap as $tempcap){
                         echo '<td>' . $tempcap . '</td>';
                     }
     echo "      </tr>
                 <tr>";
-                    echo '<td>' . 'Humidité ( % ) (Capteur)' . '</td>'; // restitu le tableau de donnée recupéré précedement
+                    echo '<th>' . 'Humidité ( % ) (Capteur)' . '</th>';
                     foreach($humiditecap as $humcap){
                         echo '<td>' . $humcap . '</td>';
                     }
     echo "      </tr>
                 <tr>";
-                    echo '<td>' . 'Pression ( hPa ) (Capteur)' . '</td>'; // restitu le tableau de donnée recupéré précedement
+                    echo '<th>' . 'Pression ( hPa ) (Capteur)' . '</th>';
                     foreach($pressioncap as $prescap){
                         echo '<td>' . $prescap . '</td>';
                     }
@@ -123,7 +123,7 @@ function historiqueJour($db, $date){
         </table>";
 }
 
-// Change le format de la date
+// Change le format de la date /!\ Verifier si elle est deprecated
 function formatDate($date){
     setlocale(LC_TIME, 'FR.utf8'); // définir la locale française
     $date_fr = ucfirst(strftime('%A', strtotime($date))) . ' ' . date('j', strtotime($date)) . ' ' . strftime('%B', strtotime($date)); // formater la date dans le format désiré
