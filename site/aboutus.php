@@ -41,7 +41,7 @@
         <div class="text">
             Travail chez CGI <br>
             Développeur Low code <br>
-            Technologies: Run My Process, Apsscript 
+            Technologies: Run My Process, Appscript 
         </div>
 
     </div>
