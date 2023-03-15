@@ -4,25 +4,25 @@ import bme280
 import time
 import datetime
 
-# Define some device parameters
-I2C_ADDR  = 0x27 # I2C device address
-LCD_WIDTH = 16   # Maximum characters per line
+# Définition de paramètres
+I2C_ADDR  = 0x27 # Adresse I2C de l'écran
+LCD_WIDTH = 16   # Caractère max par ligne
 
 # Define some device constants
-LCD_CHR = 1 # Mode - Sending data
-LCD_CMD = 0 # Mode - Sending command
+LCD_CHR = 1 # Mode - Envoi de données
+LCD_CMD = 0 # Mode - Envoi de commande
 
-LCD_LINE_1 = 0x80 # LCD RAM address for the 1st line
-LCD_LINE_2 = 0xC0 # LCD RAM address for the 2nd line
-LCD_LINE_3 = 0x94 # LCD RAM address for the 3rd line
-LCD_LINE_4 = 0xD4 # LCD RAM address for the 4th line
+LCD_LINE_1 = 0x80 # Adresse RAM de l'écran pour la première ligne
+LCD_LINE_2 = 0xC0 # Adresse RAM de l'écran pour la deuxième ligne
+LCD_LINE_3 = 0x94 # Adresse RAM de l'écran pour la troisième ligne
+LCD_LINE_4 = 0xD4 # Adresse RAM de l'écran pour la quatrième ligne
 
 LCD_BACKLIGHT  = 0x08  # On
 #LCD_BACKLIGHT = 0x00  # Off
 
 ENABLE = 0b00000100 # Enable bit
 
-# Timing constants
+# Constantes de temps
 E_PULSE = 0.0005
 E_DELAY = 0.0005
 DATA_DISPLAY_TIME = .75
@@ -181,15 +181,15 @@ def main():
     ########## PRESSION ########## 
     lcd_string("    Pression   ",LCD_LINE_1)
     time.sleep(1)
-    lcd_string("    {:.2f}%    ".format(data.pressure),LCD_LINE_2)
+    lcd_string("    {:.1f}hPa    ".format(data.pressure),LCD_LINE_2)
     time.sleep(1)
-    lcd_string(">   {:.2f}%   <".format(data.pressure),LCD_LINE_2)
+    lcd_string(">   {:.1f}hPa   <".format(data.pressure),LCD_LINE_2)
     time.sleep(DATA_DISPLAY_TIME)
-    lcd_string(" >  {:.2f}%  < ".format(data.pressure),LCD_LINE_2)
+    lcd_string(" >  {:.1f}hPa  < ".format(data.pressure),LCD_LINE_2)
     time.sleep(DATA_DISPLAY_TIME)
-    lcd_string("  > {:.2f}% <  ".format(data.pressure),LCD_LINE_2)
+    lcd_string("  > {:.1f}hPa <  ".format(data.pressure),LCD_LINE_2)
     time.sleep(DATA_DISPLAY_TIME)
-    lcd_string("   >{:.2f}%<   ".format(data.pressure),LCD_LINE_2)
+    lcd_string("   >{:.1f}hPa<   ".format(data.pressure),LCD_LINE_2)
     time.sleep(2)
     clear_screen()
     time.sleep(2)
