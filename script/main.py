@@ -50,6 +50,7 @@ def main():
     # Getting data from the sensor
     data_sensor = sensor.get_data()
     
+    #Format data for insertion
     data = [
          ("temp", weather_data['temp'], "api"),
          ("humidity", weather_data['humidity'], "api"),
@@ -59,7 +60,7 @@ def main():
          ("humidity", data_sensor['humidity'], "sensor"),
          ("pressure", data_sensor['pressure'], "sensor"),
      ]
-    
+    # Insert into the table
     database.insert_into_Measures(data)
     
     # For push modification into the database
