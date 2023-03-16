@@ -14,8 +14,8 @@ LCD_CMD = 0 # Mode - Envoi de commande
 
 LCD_LINE_1 = 0x80 # Adresse RAM de l'écran pour la première ligne
 LCD_LINE_2 = 0xC0 # Adresse RAM de l'écran pour la deuxième ligne
-LCD_LINE_3 = 0x94 # Adresse RAM de l'écran pour la troisième ligne
-LCD_LINE_4 = 0xD4 # Adresse RAM de l'écran pour la quatrième ligne
+# LCD_LINE_3 = 0x94 # Adresse RAM de l'écran pour la troisième ligne
+# LCD_LINE_4 = 0xD4 # Adresse RAM de l'écran pour la quatrième ligne
 
 LCD_BACKLIGHT  = 0x08  # On
 #LCD_BACKLIGHT = 0x00  # Off
@@ -35,24 +35,24 @@ bus = smbus2.SMBus(port)
 bme280.load_calibration_params(bus, address)
 ############# Récupération des données du capteur #############
 
-#Open I2C interface
+#Ouverture de l'interface I2C
 bus = smbus.SMBus(1)
 
 def lcd_init():
   # Initialise display
-  lcd_byte(0x33,LCD_CMD) # 110011 Initialise
-  lcd_byte(0x32,LCD_CMD) # 110010 Initialise
+  lcd_byte(0x33,LCD_CMD) # 110011 Initialisation
+  lcd_byte(0x32,LCD_CMD) # 110010 Initialisation
   lcd_byte(0x06,LCD_CMD) # 000110 Cursor move direction
-  lcd_byte(0x0C,LCD_CMD) # 001100 Display On,Cursor Off, Blink Off 
-  lcd_byte(0x28,LCD_CMD) # 101000 Data length, number of lines, font size
-  lcd_byte(0x01,LCD_CMD) # 000001 Clear display
+  lcd_byte(0x0C,LCD_CMD) # 001100 Allumage de l'écran,Curseur désactivé, Clignotement désactivé 
+  lcd_byte(0x28,LCD_CMD) # 101000 Taille des données, nombre de lignes, taille de la police
+  lcd_byte(0x01,LCD_CMD) # 000001 Nettoie l'écran
   time.sleep(E_DELAY)
 
 def lcd_byte(bits, mode):
-  # Send byte to data pins
-  # bits = the data
-  # mode = 1 for data
-  #        0 for command
+  # Envoie des données au broches
+  # bits = la donnée
+  # mode = 1 pour la donnée
+  #        0 pour la commande
 
   bits_high = mode | (bits & 0xF0) | LCD_BACKLIGHT
   bits_low = mode | ((bits<<4) & 0xF0) | LCD_BACKLIGHT
@@ -93,14 +93,15 @@ def get_hour():
     return now.strftime("%H:%M")
 
 def get_date():
-    # Obtenir la date actuelle
+    # Obtenir la date actuelle (AAAA-MM-JJ)
     today = datetime.date.today()
 
 		######## JOUR ########  
-		# Retourne le jour actuel en nombre
+		# Retourne le jour actuel en nombre (0 à 6)
     today_number = today.weekday()
     # Obtenir le jour de la semaine (0 = lundi, 6 = dimanche)
     week_day_array = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche']
+    # Afficher le jour de la semaine
     today_day = week_day_array[today_number]
 
 		######## MOIS ########
@@ -111,12 +112,11 @@ def get_date():
 
     return "{} {} {}".format(today_day, today_number, month_array[month])
     
-    # Afficher le jour de la semaine
 
 def main():
-  # Main program block
+  # Bloc du programme principal
 
-  # Initialise display
+  # Initialise l'affichage
   lcd_init()
 
   while True:
@@ -140,10 +140,11 @@ def main():
     lcd_string("Nicolas    David",LCD_LINE_1)
     time.sleep(3)
     clear_screen()
+    # Présentation de l'équipe
 
     data = bme280.sample(bus, address)
 
-    # # Send some text
+    # # Envoie du texte à l'écran
     # ########## TEMPERATURE ########## 
     lcd_string("  Temperature ",LCD_LINE_1)
     time.sleep(1)
