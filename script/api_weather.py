@@ -7,12 +7,13 @@ import os
 
 load_dotenv()
 
-# TODO: Return success for herror handling
+
 class ApiWeather:
     def __init__(self):
         self.api_key = os.getenv("OW_API_Key")
         self.baseUrl = "https://api.openweathermap.org"
         
+    # Get city lat and lon from the name with the geo api openweathermap
     def get_city_data(self, city_name):
         try: 
             url = f"{self.baseUrl}/geo/1.0/direct?q={city_name}&limit=5&appid={self.api_key}"
@@ -22,7 +23,7 @@ class ApiWeather:
         except requests.ConnectionError as e:
             print("Error while connection: {0} ".format(e))
     
-    # TODO: See how wee rly do error handling with requests
+    # Get weather data for a city
     def get_weather_data(self, city_lat, city_lon):
         try:    
             url = f"{self.baseUrl}/data/2.5/weather?lat={city_lat}&lon={city_lon}&appid={self.api_key}&units=metric"
